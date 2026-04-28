@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name — ML Engineer & Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf9f7;
+      --bg-sidebar: #1a1a2e;
+      --bg-card: #ffffff;
+      --text: #2d2d2d;
+      --text-secondary: #5a5a5a;
+      --text-sidebar: #e0e0e0;
+      --text-sidebar-muted: #9a9ab0;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --border: #e5e5e5;
+      --tag-bg: #f0f0f0;
+      --tag-text: #444;
+      --serif: 'Source Serif 4', Georgia, serif;
+      --sans: 'Source Sans 3', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover { color: var(--accent-hover); }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 280px;
+      min-height: 100vh;
+      background: var(--bg-sidebar);
+      color: var(--text-sidebar);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar .photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.15);
+      margin-bottom: 1.2rem;
+    }
+
+    .sidebar h1 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.3rem;
+      color: #fff;
+    }
+
+    .sidebar .tagline {
+      font-size: 0.82rem;
+      color: var(--text-sidebar-muted);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .sidebar .contact-list {
+      list-style: none;
+      width: 100%;
+      font-size: 0.85rem;
+    }
+    .sidebar .contact-list li {
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .sidebar .contact-list li:last-child { border-bottom: none; }
+    .sidebar .contact-list a { color: var(--text-sidebar); }
+    .sidebar .contact-list a:hover { color: #fff; }
+    .sidebar .contact-list .icon {
+      width: 16px;
+      text-align: center;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .sidebar nav {
+      margin-top: 2rem;
+      width: 100%;
+    }
+    .sidebar nav a {
+      display: block;
+      color: var(--text-sidebar-muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.5rem 0;
+      border-left: 2px solid transparent;
+      padding-left: 0.8rem;
+      transition: all 0.2s;
+    }
+    .sidebar nav a:hover {
+      color: #fff;
+      border-left-color: var(--accent);
+    }
+
+    /* ── Main Content ── */
+    .main {
+      margin-left: 280px;
+      flex: 1;
+      padding: 3rem 3.5rem;
+      max-width: 820px;
+    }
+
+    /* Sections */
+    section { margin-bottom: 2.8rem; }
+
+    section h2 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--text);
+      display: inline-block;
+    }
+
+    section p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── Entry Block (experience, education) ── */
+    .entry {
+      margin-bottom: 1.2rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--border);
+    }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .entry-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .entry-date {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      white-space: nowrap;
+    }
+    .entry-org {
+      font-size: 0.88rem;
+      color: var(--accent);
+    }
+    .entry-detail {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+    }
+
+    /* ── Skills ── */
+    .skills-table {
+      width: 100%;
+      font-size: 0.9rem;
+      border-collapse: collapse;
+    }
+    .skills-table td {
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .skills-table td:first-child {
+      font-weight: 600;
+      width: 130px;
+      color: var(--text);
+    }
+    .skills-table td:last-child {
+      color: var(--text-secondary);
+    }
+
+    /* ── Publications ── */
+    .pub {
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--border);
+    }
+    .pub-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .pub-venue {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+    .pub a {
+      font-size: 0.82rem;
+      font-family: var(--mono);
+    }
+
+    /* ── Project Cards ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.2rem;
+      transition: box-shadow 0.2s;
+    }
+    .project-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .project-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .project-card h3 a { color: var(--text); }
+    .project-card h3 a:hover { color: var(--accent); }
+    .project-card p {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 0.72rem;
+      font-family: var(--mono);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    /* ── Services Grid ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.8rem;
+    }
+    .service-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+    }
+    .service-item strong {
+      font-size: 0.92rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .service-item p {
+      font-size: 0.84rem;
+      margin: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        padding: 2rem 1.5rem 1.5rem;
+      }
+      .sidebar nav { display: none; }
+      .main {
+        margin-left: 0;
+        padding: 2rem 1.2rem;
+      }
+      .projects-grid,
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       SIDEBAR — Edit info kamu di sini
+  ═════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <!-- Taruh file photo.jpg di repo yang sama -->
+    <img src="photo.jpg" alt="Profile photo" class="photo">
+    <h1>Your Name</h1>
+    <p class="tagline">ML Engineer · Researcher<br>Jakarta, Indonesia</p>
+
+    <ul class="contact-list">
+      <li><span class="icon">✉</span> <a href="mailto:you@email.com">you@email.com</a></li>
+      <li><span class="icon">◆</span> <a href="https://github.com/yourusername" target="_blank">GitHub</a></li>
+      <li><span class="icon">◆</span> <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a></li>
+      <li><span class="icon">◆</span> <a href="https://scholar.google.com/citations?user=XXXXX" target="_blank">Google Scholar</a></li>
+      <li><span class="icon">◆</span> <a href="https://www.upwork.com/freelancers/~yourid" target="_blank">Upwork</a></li>
+    </ul>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </aside>
+
+  <!-- ════════════════════════════════════════
+       MAIN CONTENT
+  ═════════════════════════════════════════ -->
+  <div class="main">
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        Machine learning engineer and researcher with expertise in deep learning,
+        graph neural networks, and data engineering. Currently a Computer Specialist 
+        at BPS – Statistics Indonesia and completing an M.Sc. at the University of Tsukuba.
+        Open to freelance projects in ML/AI, data pipelines, and LLM applications.
+      </p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <h2>Services</h2>
+      <div class="services-grid">
+        <div class="service-item">
+          <strong>ML / Deep Learning</strong>
+          <p>Model development, GNNs, computer vision, fine-tuning.</p>
+        </div>
+        <div class="service-item">
+          <strong>Data Engineering</strong>
+          <p>ETL pipelines, data processing, quality assurance.</p>
+        </div>
+        <div class="service-item">
+          <strong>LLM / RAG Apps</strong>
+          <p>Retrieval-augmented generation, chatbots, agentic AI.</p>
+        </div>
+        <div class="service-item">
+          <strong>Research & Analysis</strong>
+          <p>Statistical modeling, technical writing, experiment design.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <table class="skills-table">
+        <tr><td>Languages</td><td>Python, SQL, R, Bash</td></tr>
+        <tr><td>ML / DL</td><td>PyTorch, PyTorch Geometric, scikit-learn, HuggingFace</td></tr>
+        <tr><td>Data</td><td>Pandas, PostgreSQL, Neo4j, FAISS, ChromaDB</td></tr>
+        <tr><td>DevOps</td><td>Docker, Git, Linux, OpenShift</td></tr>
+        <tr><td>Spoken</td><td>Indonesian (native), English (fluent), Japanese (basic)</td></tr>
+      </table>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Pranata Komputer (Computer Specialist)</span>
+          <span class="entry-date">2018 – Present</span>
+        </div>
+        <div class="entry-org">BPS – Statistics Indonesia, Jakarta</div>
+        <div class="entry-detail">
+          Directorate of Statistical Information Systems. Data engineering, ML model 
+          development for official statistics, multimodal LLM benchmarking for business classification.
+        </div>
+      </div>
+      <!-- Tambah entry lain di sini -->
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">M.Sc. Computer Science</span>
+          <span class="entry-date">2023 – 2025</span>
+        </div>
+        <div class="entry-org">University of Tsukuba, Japan</div>
+        <div class="entry-detail">
+          Thesis: <em>"TIDGA: Temporal Importance-aware Dynamic Graph Attack"</em>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">D-IV Statistical Computing</span>
+          <span class="entry-date">2014 – 2018</span>
+        </div>
+        <div class="entry-org">Politeknik Statistika STIS, Jakarta</div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <h2>Selected Publications</h2>
+      <div class="pub">
+        <div class="pub-title">TIDGA: Temporal Importance-aware Dynamic Graph Attack</div>
+        <div class="pub-venue">TGD Workshop @ EDBT/ICDT 2026, Tampere, Finland</div>
+      </div>
+      <div class="pub">
+        <div class="pub-title">How Robust Is Record Linkage?</div>
+        <div class="pub-venue">IAOS Young Statisticians Prize 2026 (submitted)</div>
+      </div>
+      <div class="pub">
+        <div class="pub-title">ICS Modernization</div>
+        <div class="pub-venue">UNECE Conference of European Statisticians, 2021</div>
+      </div>
+      <div class="pub">
+        <div class="pub-title">Indonesia's Online Census</div>
+        <div class="pub-venue">UNECE Conference of European Statisticians, 2021</div>
+      </div>
+      <!-- Tambah publikasi lain -->
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Selected Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3><a href="#">Multimodal KBLI Classification</a></h3>
+          <p>Benchmarked Qwen2.5-VL, Gemma-3, LLaMA-3.2 Vision for business classification from text &amp; photos on OpenShift AI with H200 GPU.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">HuggingFace</span>
+            <span class="tag">OpenShift</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3><a href="#">Record Linkage Robustness</a></h3>
+          <p>Robustness assessment framework across three matching methods and five perturbation types. Random Forest near-completely resilient.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">Record Linkage</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3><a href="#">TIDGA</a></h3>
+          <p>Adversarial attack on temporal GNNs using importance-aware gradient weighting with temporal decay and edge persistence.</p>
+          <div class="tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">PyG</span>
+            <span class="tag">GNN</span>
+          </div>
+        </div>
+        <!-- Tambah project lain -->
+      </div>
+    </section>
+
+    <footer>
+      Last updated <span id="lastmod"></span>
+      <script>
+        document.getElementById('lastmod').textContent =
+          new Date(document.lastModified).toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long'
+          });
+      </script>
+    </footer>
+  </div>
+
+</body>
+</html>
