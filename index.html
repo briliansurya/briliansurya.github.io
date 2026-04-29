@@ -282,21 +282,46 @@
       gap: 0.8rem;
     }
     .service-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1rem 1.2rem;
-    }
-    .service-item strong {
-      font-size: 0.92rem;
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-    .service-item p {
-      font-size: 0.84rem;
-      margin: 0;
-    }
-
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  transition: all 0.25s ease;
+  cursor: default;
+  }
+  .service-item:hover {
+    background: var(--bg-sidebar);
+    border-color: var(--bg-sidebar);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .service-item:hover strong,
+  .service-item:hover p {
+    color: var(--text-sidebar);
+  }
+  .service-item:hover .service-icon svg {
+    stroke: #fff;
+    fill: none;
+  }
+  .service-icon {
+    margin-bottom: 0.6rem;
+    display: flex;
+  }
+  .service-icon svg {
+    stroke: var(--accent);
+    transition: stroke 0.25s ease;
+  }
+  .service-item strong {
+    font-size: 0.92rem;
+    display: block;
+    margin-bottom: 0.2rem;
+    transition: color 0.25s ease;
+  }
+  .service-item p {
+    font-size: 0.84rem;
+    margin: 0;
+    transition: color 0.25s ease;
+  }
     /* ── Footer ── */
     footer {
       margin-top: 2rem;
@@ -353,7 +378,7 @@
       </li>
     </ul>>
 
-    <nav>
+    <nav>  <nav>
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#skills">Skills</a>
@@ -373,36 +398,25 @@
     <section id="about">
       <h2>About</h2>
       <p>
-        Machine learning engineer and researcher with expertise in deep learning,
-        graph neural networks, and data engineering. Currently a Computer Specialist 
-        at BPS – Statistics Indonesia and completing an M.Sc. at the University of Tsukuba.
-        Open to freelance projects in ML/AI, data pipelines, and LLM applications.
+        Hi, I'm <strong>Your Name</strong>. I work at the intersection of data engineering
+        and machine learning — building pipelines that turn messy, real-world data into
+        reliable inputs for ML models. By day, I work as a data specialist at a national
+        government agency, handling large-scale statistical data systems. By night, I do
+        research on deep learning, graph neural networks, and adversarial robustness.
+      </p>
+      <p>
+        I'm fluent across the full ML stack — from designing ETL workflows and wrangling
+        raw data, to training deep learning models with PyTorch, fine-tuning LLMs, and
+        deploying them into production. I hold an M.Sc. from the University of Tsukuba
+        with published research on adversarial attacks on temporal graph neural networks.
+      </p>
+      <p>
+        This mix means I don't just build models — I understand the data that feeds them.
+        I'm available for freelance projects involving data pipelines, ML/DL development,
+        and applied AI research.
       </p>
     </section>
-
-    <!-- SERVICES -->
-    <section id="services">
-      <h2>Services</h2>
-      <div class="services-grid">
-        <div class="service-item">
-          <strong>ML / Deep Learning</strong>
-          <p>Model development, GNNs, computer vision, fine-tuning.</p>
-        </div>
-        <div class="service-item">
-          <strong>Data Engineering</strong>
-          <p>ETL pipelines, data processing, quality assurance.</p>
-        </div>
-        <div class="service-item">
-          <strong>LLM / RAG Apps</strong>
-          <p>Retrieval-augmented generation, chatbots, agentic AI.</p>
-        </div>
-        <div class="service-item">
-          <strong>Research & Analysis</strong>
-          <p>Statistical modeling, technical writing, experiment design.</p>
-        </div>
-      </div>
-    </section>
-
+    
     <!-- SKILLS -->
     <section id="skills">
       <h2>Skills</h2>
